@@ -9,6 +9,6 @@
     line-height: 22px;
 }
 
-.popup-edit__button_disabled:honor {
-    cursor: default
+.popup-edit__button_disabled:hover {
+    cursor: default;
 }
