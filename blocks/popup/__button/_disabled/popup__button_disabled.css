@@ -8,6 +8,6 @@
     font-size: 36px;
 }
 
-.popup__button_disabled:honor {
+.popup__button_disabled:hover {
     cursor: default;
 }
