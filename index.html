@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" type="text/css" href="./pages/index.css">
+</head>
+<body>
+  <div class="root">
+    <header class="header">
+      <img src="./images/logonorm.svg" alt="mesto logo" class="logo">
+    </header>
+
+
+    <div class="profile">
+      <div class="user-info">
+        <div class="user-info__photo"></div>
+        <div class="user-info__data">
+          <div class="user-info__box">
+          <h1 class="user-info__name">Grisha Sivkov</h1>
+          <button class="user-info__edit"></button>
+          </div>
+          <p class="user-info__job">Apex predator</p>
+        </div>
+      </div>
+          <button class="button user-info__button"></button>
+  </div>
+
+    <div class="places-list">
+
+      <div class="place-card">
+        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+          <button class="place-card__delete-icon"></button>
+        </div>
+        <div class="place-card__description">
+          <h3 class="place-card__name">Камчаткафвдвадвадвдвд</h3>
+          <button class="place-card__like-icon"></button>
+        </div>
+  </div>
+
+  <div class="place-card">
+    <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+      <button class="place-card__delete-icon"></button>
+    </div>
+    <div class="place-card__description">
+      <h3 class="place-card__name">Камчатка</h3>
+      <button class="place-card__like-icon"></button>
+    </div>
+</div>
+
+<div class="place-card">
+  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+    <button class="place-card__delete-icon"></button>
+  </div>
+  <div class="place-card__description">
+    <h3 class="place-card__name">Камчатка</h3>
+    <button class="place-card__like-icon"></button>
+  </div>
+</div>
+
+<div class="place-card">
+  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+    <button class="place-card__delete-icon"></button>
+  </div>
+  <div class="place-card__description">
+    <h3 class="place-card__name">Камчатка</h3>
+    <button class="place-card__like-icon"></button>
+  </div>
+</div>
+
+<div class="place-card">
+  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+    <button class="place-card__delete-icon"></button>
+  </div>
+  <div class="place-card__description">
+    <h3 class="place-card__name">Камчатка</h3>
+    <button class="place-card__like-icon"></button>
+  </div>
+</div>
+
+
+<div class="place-card">
+  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
+    <button class="place-card__delete-icon"></button>
+  </div>
+  <div class="place-card__description">
+    <h3 class="place-card__name">Камчатка</h3>
+    <button class="place-card__like-icon"></button>
+  </div>
+</div>
+</div>
+   
+    <div class="popup-edit">
+      <div class="popup__content">
+        <img src="./images/Close Icon.png" alt="" class="popup-edit__close">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form class="popup__form" name="profile" novalidate>
+            <input required minlength="2" maxlength="30" type="text" name="name" class="popup__input" placeholder="Имя">
+            <input required minlength="2" maxlength="30" type="text" name="about" class="popup__input" placeholder="О себе">
+            <button type='submit' class="button popup-edit__button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2021 Mesto Russia</p>
+  </footer>
+
+  <script src='./script.js'>
+  </script>
+</body>
+</html>

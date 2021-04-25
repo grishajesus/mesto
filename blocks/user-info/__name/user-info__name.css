@@ -1,0 +1,25 @@
+.user-info__name {
+    margin: 0;
+    font-weight: normal;
+    font-size: 54px;
+    line-height: 56px;
+  }  
+
+@media screen and (max-width: 368px) {
+  
+  .user-info__name {
+  height: 26px;
+  left: 65px;
+  top: 272px;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 33px;
+  text-align: center;
+
+color: #FFFFFF;
+  }
+
+}
