@@ -1,11 +1,14 @@
 .profile {
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-  }
+  max-width: 1138px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin: 40px auto 50px;
+}
 
-  @media screen and (max-width: 368px) {
-    .profile {
+@media (max-width: 768px) {
+  .profile {
       flex-direction: column;
-    }
   }
+}
