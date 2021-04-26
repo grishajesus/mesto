@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 900px) {
-  .places-list {
+  .palces-list {
       grid-template-columns: repeat(2, 282px);
       grid-template-rows: repeat(1, 361px);
   }
