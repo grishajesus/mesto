@@ -4,7 +4,7 @@
 
 @import url(../blocks/header/header.css);
 
-@import url(../blocks/logo/logo.css);
+@import url(../blocks/header/__logo/header__logo.css);
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
@@ -17,6 +17,7 @@
 @import url(../blocks/profile/__user-info/profile__user-info.css);
 
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
 
 @import url(../blocks/place-card/place-card.css);
 @import url(../blocks/place-card/__description/place-card__description.css);
@@ -36,11 +37,3 @@
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__title/popup__title.css);
-
-body {
-  background-color: #000;
-}
-
-.content {
-  display: block;
-}

@@ -1,9 +1,23 @@
 .places-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 282px);
+  grid-template-columns: repeat(3, 282px);
   grid-template-rows: repeat(2, 361px);
   justify-content: center;
   gap: 20px 17px;
   max-width: 880px;
   margin: auto;
+}
+
+@media (max-width: 900px) {
+  .places-list {
+      grid-template-columns: repeat(2, 282px);
+      grid-template-rows: repeat(1, 361px);
+  }
+
+}
+
+@media (max-width: 765px) {
+  .places-list {
+      grid-template-columns: repeat(1, 282px);
+  }
 }

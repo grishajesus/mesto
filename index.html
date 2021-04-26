@@ -6,10 +6,10 @@
         <title>Mesto</title>
         <link rel="stylesheet" type="text/css" href="./pages/index.css" />
     </head>
-    <body>
-        <div class="root">
+
+    <body class="root">
             <header class="header">
-                <img src="./images/logonorm.svg" alt="mesto logo" class="logo" />
+                <img src="./images/logonorm.svg" alt="mesto logo" class="header__logo" />
             </header>
 
             <main class="content">
@@ -29,67 +29,61 @@
 
                 <div class="places-list">
                     <div class="place-card">
-                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
-                            <button class="place-card__delete-icon"></button>
-                        </div>
+                        <img src="images/karachaevo-c.png" class="place-card__image">
+                        </img>
                         <div class="place-card__description">
-                            <h3 class="place-card__name">Камчаткафвдвадвадвдвд</h3>
+                            <h3 class="place-card__name">Карачаево-Черкессия</h3>
                             <button class="place-card__like-icon"></button>
                         </div>
                     </div>
 
                     <div class="place-card">
-                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
-                            <button class="place-card__delete-icon"></button>
-                        </div>
+                        <img src="images/dombay.png" class="place-card__image">
+                        </img>
                         <div class="place-card__description">
-                            <h3 class="place-card__name">Камчатка</h3>
+                            <h3 class="place-card__name">Домбай</h3>
                             <button class="place-card__like-icon"></button>
                         </div>
                     </div>
 
                     <div class="place-card">
-                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
-                            <button class="place-card__delete-icon"></button>
-                        </div>
-                        <div class="place-card__description">
-                            <h3 class="place-card__name">Камчатка</h3>
-                            <button class="place-card__like-icon"></button>
-                        </div>
-                    </div>
+                      <img src="images/elbrus.png" class="place-card__image">
+                      </img>
+                      <div class="place-card__description">
+                          <h3 class="place-card__name">Эльбрус</h3>
+                          <button class="place-card__like-icon"></button>
+                      </div>
+                  </div>
 
                     <div class="place-card">
-                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
-                            <button class="place-card__delete-icon"></button>
-                        </div>
+                        <img src="images/elbrus.png" class="place-card__image">
+                        </img>
                         <div class="place-card__description">
-                            <h3 class="place-card__name">Камчатка</h3>
+                            <h3 class="place-card__name">Эльбрус</h3>
                             <button class="place-card__like-icon"></button>
                         </div>
                     </div>
 
-                    <div class="place-card">
-                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
-                            <button class="place-card__delete-icon"></button>
-                        </div>
-                        <div class="place-card__description">
-                            <h3 class="place-card__name">Камчатка</h3>
-                            <button class="place-card__like-icon"></button>
-                        </div>
-                    </div>
+                    <div class="places-list">
+                      <div class="place-card">
+                          <img src="images/karachaevo-c.png" class="place-card__image">
+                          </img>
+                          <div class="place-card__description">
+                              <h3 class="place-card__name">Карачаево-Черкессия</h3>
+                              <button class="place-card__like-icon"></button>
+                          </div>
+                      </div>
+  
+                      <div class="place-card">
+                          <img src="images/dombay.png" class="place-card__image">
+                          </img>
+                          <div class="place-card__description">
+                              <h3 class="place-card__name">Домбай</h3>
+                              <button class="place-card__like-icon"></button>
+                          </div>
+                      </div>
 
-                    <div class="place-card">
-                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
-                            <button class="place-card__delete-icon"></button>
-                        </div>
-                        <div class="place-card__description">
-                            <h3 class="place-card__name">Камчатка</h3>
-                            <button class="place-card__like-icon"></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="popup popup_opened">
+                <div class="popup">
                     <div class="popup__content">
                         <button type="button" class="popup__close-button"></button>
                         <h2 class="popup__title">Редактировать профиль</h2>
@@ -107,6 +101,5 @@
             </footer>
 
             <script src="./script.js"></script>
-        </div>
     </body>
 </html>
