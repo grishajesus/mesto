@@ -1,116 +1,112 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesto</title>
-  <link rel="stylesheet" type="text/css" href="./pages/index.css">
-</head>
-<body>
-  <div class="root">
-    <header class="header">
-      <img src="./images/logonorm.svg" alt="mesto logo" class="logo">
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mesto</title>
+        <link rel="stylesheet" type="text/css" href="./pages/index.css" />
+    </head>
+    <body>
+        <div class="root">
+            <header class="header">
+                <img src="./images/logonorm.svg" alt="mesto logo" class="logo" />
+            </header>
 
-    <main class="content">
+            <main class="content">
+                <section class="profile">
+                    <div class="profile__user-info">
+                        <img class="profile__pic" src="images/image.png" alt="Жак-Ив Кусто" />
+                        <div class="profile__data">
+                            <div class="profile__box">
+                                <h1 class="profile__name">Grisha Sivkov</h1>
+                                <p class="profile__job">Apex predаtor</p>
+                            </div>
+                            <button type="button" class="profile__edit-button"></button>
+                        </div>
+                    </div>
+                    <button type="button" class="profile__add-button"></button>
+                </section>
 
-  <section class="profile">
-    <div class="profile__user-info">
-        <img class="profile__pic" src="images/image.png" alt="Жак-Ив Кусто">
-        <div class="profile__data">
-            <div class="profile__box">
-                <h1 class="profile__name">Grisha Sivkov</h1>
-                <p class="profile__job">Apex predаtor</p>
-              </div>
-            <button type="button" class="profile__edit-button"></button>
+                <div class="places-list">
+                    <div class="place-card">
+                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
+                            <button class="place-card__delete-icon"></button>
+                        </div>
+                        <div class="place-card__description">
+                            <h3 class="place-card__name">Камчаткафвдвадвадвдвд</h3>
+                            <button class="place-card__like-icon"></button>
+                        </div>
+                    </div>
+
+                    <div class="place-card">
+                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
+                            <button class="place-card__delete-icon"></button>
+                        </div>
+                        <div class="place-card__description">
+                            <h3 class="place-card__name">Камчатка</h3>
+                            <button class="place-card__like-icon"></button>
+                        </div>
+                    </div>
+
+                    <div class="place-card">
+                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
+                            <button class="place-card__delete-icon"></button>
+                        </div>
+                        <div class="place-card__description">
+                            <h3 class="place-card__name">Камчатка</h3>
+                            <button class="place-card__like-icon"></button>
+                        </div>
+                    </div>
+
+                    <div class="place-card">
+                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
+                            <button class="place-card__delete-icon"></button>
+                        </div>
+                        <div class="place-card__description">
+                            <h3 class="place-card__name">Камчатка</h3>
+                            <button class="place-card__like-icon"></button>
+                        </div>
+                    </div>
+
+                    <div class="place-card">
+                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
+                            <button class="place-card__delete-icon"></button>
+                        </div>
+                        <div class="place-card__description">
+                            <h3 class="place-card__name">Камчатка</h3>
+                            <button class="place-card__like-icon"></button>
+                        </div>
+                    </div>
+
+                    <div class="place-card">
+                        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg);">
+                            <button class="place-card__delete-icon"></button>
+                        </div>
+                        <div class="place-card__description">
+                            <h3 class="place-card__name">Камчатка</h3>
+                            <button class="place-card__like-icon"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup popup_opened">
+                    <div class="popup__content">
+                        <button type="button" class="popup__close-button"></button>
+                        <h2 class="popup__title">Редактировать профиль</h2>
+                        <form class="popup__form" name="popupForm">
+                            <input class="popup__input" type="text" placeholder="Имя" id="name" />
+                            <input class="popup__input" type="text" placeholder="О себе" id="about" />
+                            <button type="submit" class="popup__submit-button">Сохранить</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <p class="footer__copyright">© 2021 Mesto Russia</p>
+            </footer>
+
+            <script src="./script.js"></script>
         </div>
-    </div>
-    <button type="button" class="profile__add-button"></button>
-</section>
-
-    <div class="places-list">
-
-      <div class="place-card">
-        <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
-          <button class="place-card__delete-icon"></button>
-        </div>
-        <div class="place-card__description">
-          <h3 class="place-card__name">Камчаткафвдвадвадвдвд</h3>
-          <button class="place-card__like-icon"></button>
-        </div>
-  </div>
-
-  <div class="place-card">
-    <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
-      <button class="place-card__delete-icon"></button>
-    </div>
-    <div class="place-card__description">
-      <h3 class="place-card__name">Камчатка</h3>
-      <button class="place-card__like-icon"></button>
-    </div>
-</div>
-
-<div class="place-card">
-  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
-    <button class="place-card__delete-icon"></button>
-  </div>
-  <div class="place-card__description">
-    <h3 class="place-card__name">Камчатка</h3>
-    <button class="place-card__like-icon"></button>
-  </div>
-</div>
-
-<div class="place-card">
-  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
-    <button class="place-card__delete-icon"></button>
-  </div>
-  <div class="place-card__description">
-    <h3 class="place-card__name">Камчатка</h3>
-    <button class="place-card__like-icon"></button>
-  </div>
-</div>
-
-<div class="place-card">
-  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
-    <button class="place-card__delete-icon"></button>
-  </div>
-  <div class="place-card__description">
-    <h3 class="place-card__name">Камчатка</h3>
-    <button class="place-card__like-icon"></button>
-  </div>
-</div>
-
-
-<div class="place-card">
-  <div class="place-card__image" style="background-image: url(https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg)">
-    <button class="place-card__delete-icon"></button>
-  </div>
-  <div class="place-card__description">
-    <h3 class="place-card__name">Камчатка</h3>
-    <button class="place-card__like-icon"></button>
-  </div>
-</div>
-</div>
-
-    <div class="popup popup_opened">
-      <div class="popup__content">
-          <button type="button" class="popup__close-button"></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="popupForm">
-              <input class="popup__input" type="text" placeholder="Имя" id="name">
-              <input class="popup__input" type="text" placeholder="О себе" id="about">
-              <button type="submit" class="popup__submit-button">Сохранить</button>
-          </form>
-      </div>
-  </div>
-
-  <footer class="footer">
-    <p class="footer__copyright">© 2021 Mesto Russia</p>
-  </footer>
-
-  <script src='./script.js'>
-  </script>
-  </div>
-</main>
-</body>
+    </body>
 </html>
