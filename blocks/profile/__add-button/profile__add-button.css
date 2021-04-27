@@ -9,6 +9,7 @@
   background-color: transparent;
   justify-self: flex-end;
   border-radius: 2px;
+  margin-left: 244px;
 }
 
 .profile__add-button:hover {
@@ -16,8 +17,9 @@
   opacity: 0.6;
 }
 
-@media (max-width: 321px) {
+@media (max-width: 768px) {
   .profile__add-button {
       width: 282px;
+      margin-left: 0;
   }
 }

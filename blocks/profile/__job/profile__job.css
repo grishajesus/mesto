@@ -11,7 +11,7 @@
   max-width: 400px;
 }
 
-@media (max-width: 934px) {
+@media (max-width: 768px) {
   .profile__job {
       align-self: center;
       font-size: 14px;

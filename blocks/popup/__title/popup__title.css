@@ -8,7 +8,7 @@
   align-self: flex-start;
 }
 
-@media (max-width: 934px) {
+@media (max-width: 768px) {
   .popup__title {
       font-size: 18px;
       line-height: 22px;
