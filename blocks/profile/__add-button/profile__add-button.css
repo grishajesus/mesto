@@ -7,9 +7,8 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-  justify-self: flex-end;
   border-radius: 2px;
-  margin-left: 244px;
+  margin-left: auto;
 }
 
 .profile__add-button:hover {

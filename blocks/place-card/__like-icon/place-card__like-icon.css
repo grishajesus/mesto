@@ -5,12 +5,11 @@
     width: 30px;
     height: 19px;
     cursor: pointer;
-    transition: transform .3s linear;
+    transition: ease-in;
   }
   
   
   .place-card__like-icon:hover {
-    transition: ease-in;
     opacity: .5;
     transform: scale(1.03);
   }
