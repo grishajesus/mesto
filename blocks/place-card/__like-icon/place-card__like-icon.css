@@ -6,7 +6,7 @@
     height: 19px;
     cursor: pointer;
     opacity: 1;
-    transition: opacity .2s
+    transition: opacity .2s;
 }
 
 .place-card__like-icon_active {
