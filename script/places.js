@@ -95,10 +95,10 @@ document.body.addEventListener("click", (event) => {
 		return;
 	}
 
-	$modalImage.querySelector(".popup__image__content__image").src = target.src;
+	$modalImage.querySelector(".popup-image__image").src = target.src;
 
 	$modalImage.querySelector(
-		".popup__image__content__title"
+		".popup-image__title"
 	).textContent = placeCard.querySelector(".place-card__name").textContent;
 
 	handleOpenPopupByEvent(event);
