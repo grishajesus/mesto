@@ -5,11 +5,14 @@
     width: 30px;
     height: 19px;
     cursor: pointer;
-    transition: ease-in;
-  }
+    opacity: 1;
+    transition: opacity .2s
+}
+
+.place-card__like-icon_active {
+    background-image: url(../../../images/like-active.svg);
+}
   
-  
-  .place-card__like-icon:hover {
-    opacity: .5;
-    transform: scale(1.03);
-  }
+.place-card__like-icon:hover {
+    opacity: .6;
+}
