@@ -1,4 +1,4 @@
-import { getModalByEvent, handleOpenPopupByEvent } from "./common.js";
+import { cardImagePopup, openPopup } from "./common.js";
 
 const initialCards = [
 	{
@@ -33,27 +33,44 @@ const initialCards = [
 	},
 ];
 
-const $placesListContainer = document.getElementById("places-list");
+const placesListContainer = document.getElementById("places-list");
 
 // place card template
-const placesListCardTemplate = (place) => `
-    <div class="place-card">
-        <div class="place-card__delete"></div>
-        <img src="${place.link}" class="place-card__image" alt="${place.name}" data-modal-id="place-image" />
+const generatePlaceCardTemplate = (place) => {
+	const placeCardTemplate = document.querySelector('#place-card-template').content;
+	const placeCardElement = placeCardTemplate.querySelector('.place-card').cloneNode(true);
 
-        <div class="place-card__description">
-            <h3 class="place-card__name">${place.name}</h3>
-            <button type="button" class="place-card__like-icon"></button>
-        </div>
-    </div>
-`;
+
+	// set data
+	placeCardElement.querySelector('.place-card__image').src = place.link;
+	placeCardElement.querySelector('.place-card__image').alt = place.name;
+	placeCardElement.querySelector('.place-card__name').textContent = place.name;
+
+	// add listeners
+  // -> for delete
+	placeCardElement.querySelector('.place-card__delete').addEventListener('click', () => {
+    handleDeleteCard(placeCardElement)
+  });
+
+  // -> for toggle like
+	placeCardElement.querySelector('.place-card__like-icon').addEventListener('click', (event) => {
+		event.target.classList.toggle("place-card__like-icon_active");
+	});
+
+  // -> for open image
+	placeCardElement.querySelector(".place-card__image").addEventListener('click', (event) => {
+    cardImagePopup.querySelector(".popup-image__image").src = place.link;
+    cardImagePopup.querySelector(".popup-image__title").textContent = place.name;
+
+    openPopup(cardImagePopup);
+  });
+
+	return placeCardElement;
+};
 
 // create card by place data
 const handleCreateCard = (place) =>
-	$placesListContainer.insertAdjacentHTML(
-		"afterbegin",
-		placesListCardTemplate(place)
-	);
+	placesListContainer.prepend(generatePlaceCardTemplate(place));
 
 // delete card by card element
 const handleDeleteCard = (card) => {
@@ -63,59 +80,6 @@ const handleDeleteCard = (card) => {
 
 	card.remove();
 };
-
-// add listener for delete cards
-document.body.addEventListener("click", (event) => {
-	const target = event.target;
-
-	const placeCard = target.closest(".place-card");
-	const isRemoveTrigger = target.classList.contains("place-card__delete");
-
-	if (!placeCard || !isRemoveTrigger) {
-		return;
-	}
-
-	handleDeleteCard(placeCard);
-});
-
-// add listener for open modal image
-document.body.addEventListener("click", (event) => {
-	const target = event.target;
-
-	const placeCard = target.closest(".place-card");
-	const isImageModalTrigger = target.classList.contains("place-card__image");
-
-	if (!placeCard || !isImageModalTrigger) {
-		return;
-	}
-
-	const $modalImage = getModalByEvent(event);
-
-	if (!$modalImage) {
-		return;
-	}
-
-	$modalImage.querySelector(".popup-image__image").src = target.src;
-
-	$modalImage.querySelector(
-		".popup-image__title"
-	).textContent = placeCard.querySelector(".place-card__name").textContent;
-
-	handleOpenPopupByEvent(event);
-});
-
-// add listener for toggle like cards
-document.body.addEventListener("click", (event) => {
-	const target = event.target;
-
-	const isLikeTrigger = target.classList.contains("place-card__like-icon");
-
-	if (!isLikeTrigger) {
-		return;
-	}
-
-	target.classList.toggle("place-card__like-icon_active");
-});
 
 // init cards
 initialCards.forEach(handleCreateCard);

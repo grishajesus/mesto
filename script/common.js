@@ -1,14 +1,4 @@
-const getModalByEvent = (event) => {
-	const modal = document.getElementById(
-		event.target.dataset.modalId.replace("#", "")
-	);
-
-	return modal;
-};
-
-const handleOpenPopupByEvent = (event) => {
-	const modal = getModalByEvent(event);
-
+const openPopup = (modal) => {
 	if (!modal) {
 		return;
 	}
@@ -16,9 +6,7 @@ const handleOpenPopupByEvent = (event) => {
 	modal.classList.add("popup_opened");
 };
 
-const handleClosePopupByEvent = (event) => {
-	const modal = event.target.closest(".popup");
-
+const closePopup = (modal) => {
 	if (!modal) {
 		return;
 	}
@@ -26,15 +14,22 @@ const handleClosePopupByEvent = (event) => {
 	modal.classList.remove("popup_opened");
 };
 
-const $triggerPopupElements = document.querySelectorAll(".trigger-popup");
-const $closePopupElements = document.querySelectorAll(".popup__close-button");
+const profileOpenButton = document.querySelector('.profile__edit-button');
+const profileSettingsPopup = document.querySelector('.popup_type_profile');
+const profileCloseButton = profileSettingsPopup.querySelector('.popup__close-button');
 
-$triggerPopupElements.forEach((element) =>
-	element.addEventListener("click", handleOpenPopupByEvent)
-);
+const profileCardAddButton = document.querySelector('.profile__add-button');
+const profileCardAddPopup = document.querySelector('.popup_type_card-add');
+const profileCardAddCloseButton = profileCardAddPopup.querySelector('.popup__close-button');
 
-$closePopupElements.forEach((element) =>
-	element.addEventListener("click", handleClosePopupByEvent)
-);
+const cardImagePopup = document.querySelector('.popup_type_image');
+const cardImagePopupCloseButton = cardImagePopup.querySelector('.popup__close-button');
 
-export { getModalByEvent, handleOpenPopupByEvent, handleClosePopupByEvent };
+profileOpenButton.addEventListener('click', () => openPopup(profileSettingsPopup));
+profileCardAddButton.addEventListener('click', () => openPopup(profileCardAddPopup));
+
+profileCloseButton.addEventListener('click', () => closePopup(profileSettingsPopup));
+profileCardAddCloseButton.addEventListener('click', () => closePopup(profileCardAddPopup));
+cardImagePopupCloseButton.addEventListener('click', () => closePopup(cardImagePopup));
+
+export { profileSettingsPopup, profileCardAddPopup, cardImagePopup, openPopup, closePopup };

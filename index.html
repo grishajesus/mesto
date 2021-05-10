@@ -20,10 +20,10 @@
                         <h1 class="profile__name">Grisha Sivkov</h1>
                         <p class="profile__job">Apex predаtor</p>
                     </div>
-                    <button type="button" class="trigger-popup profile__edit-button" data-modal-id="#profile-settings"></button>
+                    <button type="button" class="profile__edit-button"></button>
                 </div>
 
-                <button type="button" class="trigger-popup profile__add-button" data-modal-id="#place-add-card"></button>
+                <button type="button" class="profile__add-button"></button>
             </section>
 
             <div id="places-list" class="places-list"></div>
@@ -33,11 +33,11 @@
             <p class="footer__copyright">© 2021 Mesto Russia</p>
         </footer>
 
-        <div id="profile-settings" class="popup">
+        <div class="popup popup_type_profile">
             <div class="popup__content">
                 <button type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                
+
                 <form class="popup__form" name="profile-settings__form">
                     <input class="popup__input" name="name" type="text" placeholder="Имя" />
                     <input class="popup__input" name="about" type="text" placeholder="О себе" />
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div id="place-add-card" class="popup">
+        <div class="popup popup_type_card-add">
             <div class="popup__content">
                 <button type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Новое место</h2>
@@ -59,13 +59,25 @@
             </div>
         </div>
 
-        <div id="place-image" class="popup popup-image">
+        <div class="popup popup-image popup_type_image">
             <div class="popup-image__content">
                 <button type="button" class="popup__close-button"></button>
                 <img class="popup-image__image" alt="" />
                 <h4 class="popup-image__title"></h4>
             </div>
         </div>
+
+        <template id="place-card-template">
+            <div class="place-card">
+                <div class="place-card__delete"></div>
+                <img class="place-card__image" data-modal-id="place-image" />
+
+                <div class="place-card__description">
+                    <h3 class="place-card__name"></h3>
+                    <button type="button" class="place-card__like-icon"></button>
+                </div>
+            </div>
+        </template>
 
         <script type="module" src="./script/index.js"></script>
     </body>

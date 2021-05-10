@@ -1,7 +1,7 @@
-import { handleClosePopupByEvent } from "./common.js";
+import { profileCardAddPopup, closePopup } from "./common.js";
 import { handleCreateCard } from "./places.js";
 
-const $placeAddCardForm = document.querySelector(
+const placeAddCardForm = document.querySelector(
 	'form[name="place-add-card__form"]'
 );
 
@@ -10,11 +10,11 @@ const handleSubmitPlaceAddCardForm = (event) => {
 
 	// formData = { name: 'asdsadsa', link: 'asdasd' }
 	const formData = Object.fromEntries(new FormData(event.target));
-	
+
 	handleCreateCard(formData);
 	event.target.reset();
 
-	handleClosePopupByEvent(event);
+	closePopup(profileCardAddPopup);
 };
 
-$placeAddCardForm.addEventListener("submit", handleSubmitPlaceAddCardForm);
+placeAddCardForm.addEventListener("submit", handleSubmitPlaceAddCardForm);
