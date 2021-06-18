@@ -1,3 +1,7 @@
+const keyCodes = {
+  ESCAPE: "Escape",
+}
+
 const openPopup = (modal) => {
 	if (!modal) {
 		return;
@@ -14,6 +18,8 @@ const closePopup = (modal) => {
 	modal.classList.remove("popup_opened");
 };
 
+const findCurrentOverlay = () => document.querySelector('.popup.popup_opened');
+
 const profileOpenButton = document.querySelector('.profile__edit-button');
 const profileSettingsPopup = document.querySelector('.popup_type_profile');
 const profileCloseButton = profileSettingsPopup.querySelector('.popup__close-button');
@@ -24,6 +30,22 @@ const profileCardAddCloseButton = profileCardAddPopup.querySelector('.popup__clo
 
 const cardImagePopup = document.querySelector('.popup_type_image');
 const cardImagePopupCloseButton = cardImagePopup.querySelector('.popup__close-button');
+
+document.body.addEventListener('click', (e) => {
+  const currentOverlay = findCurrentOverlay();
+
+  if (e.target.classList.contains('popup')) {
+    closePopup(currentOverlay);
+  }
+})
+
+document.body.addEventListener('keydown', (e) => {
+  const currentOverlay = findCurrentOverlay();
+
+  if (e.code === keyCodes.ESCAPE && currentOverlay !== null) {
+    closePopup(currentOverlay);
+  }
+})
 
 profileOpenButton.addEventListener('click', () => openPopup(profileSettingsPopup));
 profileCardAddButton.addEventListener('click', () => openPopup(profileCardAddPopup));

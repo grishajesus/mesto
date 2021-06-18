@@ -1,3 +1,4 @@
+import "./validator.js"
 import "./common.js";
 import "./places.js";
 import "./profile-settings-modal.js";

@@ -8,8 +8,16 @@ const placeAddCardForm = document.querySelector(
 const handleSubmitPlaceAddCardForm = (event) => {
 	event.preventDefault();
 
-	// formData = { name: 'asdsadsa', link: 'asdasd' }
-	const formData = Object.fromEntries(new FormData(event.target));
+    const formData = {
+        name: '',
+        link: '',
+    };
+
+    const inputs = event.target.querySelectorAll('input');
+
+    inputs.forEach(input => {
+        formData[input.name] = input.value;
+    });
 
 	handleCreateCard(formData);
 	event.target.reset();
