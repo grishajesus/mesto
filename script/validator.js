@@ -23,7 +23,7 @@ function setCustomError(form, input) {
         const min = input.getAttribute('minlength');
         const max = input.getAttribute('maxlength');
 
-        error = `Неправильно заполнено поле, Введено ${currentLength}, должно быть от ${min} до ${max}`;
+        error = `Неправильно заполнено поле! Введено ${currentLength}, должно быть от ${min} до ${max}`;
     } else if (validity.typeMismatch) {
         error = 'Это не ссылка';
     }
