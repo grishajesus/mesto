@@ -31,34 +31,34 @@ const initialCards = [
 const placesListContainer = document.getElementById("places-list");
 
 // place card template
-const generatePlaceCardTemplate = (place) => {
+const generatePlaceCardTemplate = place => {
 	const placeCardTemplate = document.querySelector('#place-card-template').content;
 	const placeCardElement = placeCardTemplate.querySelector('.place-card').cloneNode(true);
-
+    const placeCardImage = placeCardElement.querySelector('.place-card__image');
 
 	// set data
-	placeCardElement.querySelector('.place-card__image').src = place.link;
-	placeCardElement.querySelector('.place-card__image').alt = place.name;
+	placeCardImage.src = place.link;
+	placeCardImage.alt = place.name;
 	placeCardElement.querySelector('.place-card__name').textContent = place.title;
 
 	// add listeners
-  // -> for delete
+    // -> for delete
 	placeCardElement.querySelector('.place-card__delete').addEventListener('click', () => {
-    handleDeleteCard(placeCardElement)
-  });
+        handleDeleteCard(placeCardElement)
+    });
 
-  // -> for toggle like
-	placeCardElement.querySelector('.place-card__like-icon').addEventListener('click', (event) => {
-		event.target.classList.toggle("place-card__like-icon_active");
-	});
+    // -> for toggle like
+    placeCardElement.querySelector('.place-card__like-icon').addEventListener('click', event => {
+        event.target.classList.toggle("place-card__like-icon_active");
+    });
 
-  // -> for open image
-	placeCardElement.querySelector(".place-card__image").addEventListener('click', (event) => {
-    cardImagePopup.querySelector(".popup-image__image").src = place.link;
-    cardImagePopup.querySelector(".popup-image__title").textContent = place.title;
+    // -> for open image
+    placeCardImage.addEventListener('click', () => {
+        cardImagePopup.querySelector(".popup-image__image").src = place.link;
+        cardImagePopup.querySelector(".popup-image__title").textContent = place.title;
 
-    openPopup(cardImagePopup);
-  });
+        openPopup(cardImagePopup);
+    });
 
 	return placeCardElement;
 };

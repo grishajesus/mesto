@@ -1,27 +1,34 @@
-function enableValidation() {
-    const forms = document.querySelectorAll('.popup__form');
+const enableValidation = selectors => {
+    const forms = document.querySelectorAll(selectors.formSelector);
 
     forms.forEach(form => {
-        const inputs = form.querySelectorAll('input');
-
-        inputs.forEach(input => {
-            input.addEventListener('input', handleFormInput);
-        });
+        setEventListeners(form, selectors);
     });
 }
 
-function setCustomError(form, input) {
-    const errorWrap = form.querySelector(`#${input.name}-error`)
-    const validity = input.validity;
+const setEventListeners = (formElement, selectors) => {
+    const inputs = formElement.querySelectorAll(selectors.inputSelector);
+
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            setInputListener(formElement, input, selectors);
+            setSubmitButtonListener(formElement, selectors);
+        });
+    });
+};
+
+const setInputListener = (formElement, inputElement, selectors) => {
+    const errorContainer = formElement.querySelector(`#${inputElement.name}-error`);
+    const validity = inputElement.validity;
 
     let error = '';
 
-    if (!input.value.length) {
+    if (!inputElement.value.length) {
         error = 'Вы пропустили это поле';
     } else if (validity.tooShort || validity.tooLong) {
-        const currentLength = input.value.length;
-        const min = input.getAttribute('minlength');
-        const max = input.getAttribute('maxlength');
+        const currentLength = inputElement.value.length;
+        const min = inputElement.getAttribute('minlength');
+        const max = inputElement.getAttribute('maxlength');
 
         error = `Неправильно заполнено поле! Введено ${currentLength}, должно быть от ${min} до ${max}`;
     } else if (validity.typeMismatch) {
@@ -29,33 +36,34 @@ function setCustomError(form, input) {
     }
 
     if (error) {
-        errorWrap.classList.add('popup__input-error_visible');
+        inputElement.classList.add(selectors.inputErrorClass);
+        errorContainer.classList.add(selectors.errorClass);
     } else {
-        errorWrap.classList.remove('popup__input-error_visible');
+        inputElement.classList.remove(selectors.inputErrorClass);
+        errorContainer.classList.remove(selectors.errorClass);
     }
 
-    errorWrap.textContent = error;
-}
+    errorContainer.textContent = error;
+};
 
-function handleFormInput(event) {
-    const input = event.target;
-    const form = input.closest('form');
-
-    setCustomError(form, input);
-    setSubmitButtonState(form);
-}
-
-function setSubmitButtonState(form) {
-    const button = form.querySelector('.popup__submit-button')
-    const isValid = form.checkValidity();
+const setSubmitButtonListener = (formElement, selectors) => {
+    const button = formElement.querySelector(selectors.submitButtonSelector)
+    const isValid = formElement.checkValidity();
 
     if (isValid) {
-        button.classList.remove('popup__submit-button_error');
+        button.classList.remove(selectors.inactiveButtonClass);
         button.removeAttribute('disabled');
     } else {
-        button.classList.add('popup__submit-button_error');
+        button.classList.add(selectors.inactiveButtonClass);
         button.setAttribute('disabled', 'disabled');
     }
-}
+};
 
-enableValidation();
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_error',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_visible'
+});

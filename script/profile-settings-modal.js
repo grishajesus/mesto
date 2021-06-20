@@ -1,8 +1,8 @@
 import { profileSettingsPopup, closePopup } from "./common.js";
 
-const profileSettingsForm = document.querySelector(
-	'form[name="profile-settings__form"]'
-);
+const profileSettingsForm = document.querySelector('form[name="profile-settings__form"]');
+const nameInput = profileSettingsForm.querySelector('input[name="name"]');
+const aboutInput = profileSettingsForm.querySelector('input[name="about"]');
 
 const profileTitle = document.querySelector(".profile__name");
 const profileSubtitle = document.querySelector(".profile__job");
@@ -20,11 +20,6 @@ const handleSubmitProfileSettingsForm = (event) => {
 };
 
 profileEditButton.addEventListener("click", () => {
-	const nameInput = profileSettingsForm.querySelector('input[name="name"]');
-	const aboutInput = profileSettingsForm.querySelector(
-		'input[name="about"]'
-	);
-
 	nameInput.value = profileTitle.textContent;
 	aboutInput.value = profileSubtitle.textContent;
 });
