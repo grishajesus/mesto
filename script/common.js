@@ -54,7 +54,7 @@ const cardImagePopupCloseButton = cardImagePopup.querySelector('.popup__close-bu
 
 profileOpenButton.addEventListener('click', () => openPopup(profileSettingsPopup));
 profileCardAddButton.addEventListener('click', () => {
-    profileCardAddSubmitButton.classList.add('popup__submit-button_error');
+    profileCardAddSubmitButton.classList.add('disabled', 'popup__submit-button_error');
     openPopup(profileCardAddPopup);
 });
 
