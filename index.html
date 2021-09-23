@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mesto</title>
+        <link rel="stylesheet" type="text/css" href="./pages/index.css" />
+    </head>
+
+    <body class="root">
+        <header class="header">
+            <img src="./images/logonorm.svg" alt="mesto logo" class="header__logo" />
+        </header>
+
+        <main class="content">
+            <section class="profile">
+                <img class="profile__pic" src="images/image.png" alt="Жак-Ив Кусто" />
+                <div class="profile__data">
+                    <div class="profile__box">
+                        <h1 class="profile__name">Grisha Sivkov</h1>
+                        <p class="profile__job">Apex predаtor</p>
+                    </div>
+                    <button type="button" class="profile__edit-button"></button>
+                </div>
+
+                <button type="button" class="profile__add-button"></button>
+            </section>
+
+            <div id="places-list" class="places-list"></div>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__copyright">© 2021 Mesto Russia</p>
+        </footer>
+
+        <div class="popup popup_type_profile">
+            <div class="popup__content">
+                <button type="button" class="popup__close-button"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+
+                <form class="popup__form" name="profile-settings__form">
+                    <div>
+                        <input class="popup__input" name="name" type="text" placeholder="Имя" required minlength="2" maxlength="40" />
+                        <span class="popup__input-error" id="name-error"></span>
+                    </div>
+
+                    <div>
+                        <input class="popup__input" name="about" type="text" placeholder="О себе" required minlength="2" maxlength="200" />
+                        <span class="popup__input-error" id="about-error"></span>
+                    </div>
+
+                    <button type="submit" class="popup__submit-button popup__submit-button_error">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_card-add">
+            <div class="popup__content">
+                <button type="button" class="popup__close-button"></button>
+                <h2 class="popup__title">Новое место</h2>
+
+                <form class="popup__form" name="place-add-card__form" novalidate>
+                    <div>
+                        <input type="text" class="popup__input" name="title" required placeholder="Название" minlength="2" maxlength="30">
+                        <span class="popup__input-error" id="title-error"></span>
+                    </div>
+
+                    <div>
+                        <input type="url" class="popup__input"  name="link" required placeholder="Ссылка на картинку">
+                        <span class="popup__input-error" id="link-error"></span>
+                    </div>
+
+                    <button disabled type="submit" class="popup__submit-button">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup popup-image popup_type_image">
+            <div class="popup-image__content">
+                <button type="button" class="popup__close-button"></button>
+                <img class="popup-image__image" alt="img" src="//:0" />
+                <h4 class="popup-image__title"></h4>
+            </div>
+        </div>
+
+        <template id="place-card-template">
+            <div class="place-card">
+                <div class="place-card__delete"></div>
+                <img class="place-card__image" data-modal-id="place-image" />
+
+                <div class="place-card__description">
+                    <h3 class="place-card__name"></h3>
+                    <button type="button" class="place-card__like-icon"></button>
+                </div>
+            </div>
+        </template>
+
+        <script type="module" src="./script/index.js"></script>
+    </body>
+</html>
