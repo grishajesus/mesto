@@ -1,5 +1,5 @@
 .place-card__like-icon {
-    background: url(../../../images/like.svg) center no-repeat;
+    background: url(../../../../images/like.svg) center no-repeat;
     background-color: transparent;
     border: none;
     width: 30px;
@@ -10,9 +10,9 @@
 }
 
 .place-card__like-icon_active {
-    background-image: url(../../../images/like-active.svg);
+    background-image: url(../../../../images/like-active.svg);
 }
-  
+
 .place-card__like-icon:hover {
     opacity: .6;
 }

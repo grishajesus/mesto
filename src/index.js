@@ -1,10 +1,12 @@
-import { places } from './constants/places.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
-import { PopupWithForm } from './components/PopupWithForm.js';
-import { UserInfo } from './components/UserInfo.js'
-import { FormValidator, defaultFormValidatorSelectors } from "./components/FormValidator.js";
-import { Section } from "./components/Section.js";
-import { Card } from "./components/Card.js";
+import './styles/index.css'
+
+import { places } from './scripts/constants/places';
+import { PopupWithImage } from './scripts/components/PopupWithImage';
+import { PopupWithForm } from './scripts/components/PopupWithForm';
+import { UserInfo } from './scripts/components/UserInfo'
+import { FormValidator, defaultFormValidatorSelectors } from "./scripts/components/FormValidator";
+import { Section } from "./scripts/components/Section";
+import { Card } from "./scripts/components/Card";
 
 // init user info
 const userInfo = new UserInfo('.profile__name', '.profile__job');
