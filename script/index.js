@@ -1,8 +1,9 @@
+import { defaultFormValidatorSelectors } from "./constants/forms.js";
 import { places } from './constants/places.js';
 import { PopupWithImage } from './components/PopupWithImage.js';
 import { PopupWithForm } from './components/PopupWithForm.js';
 import { UserInfo } from './components/UserInfo.js'
-import { FormValidator, defaultFormValidatorSelectors } from "./components/FormValidator.js";
+import { FormValidator } from "./components/FormValidator.js";
 import { Section } from "./components/Section.js";
 import { Card } from "./components/Card.js";
 
@@ -13,14 +14,20 @@ const userInfo = new UserInfo('.profile__name', '.profile__job');
 const placeImagePopup = new PopupWithImage('.popup_type_image');
 placeImagePopup.setEventListeners();
 
+function createCard(item) {
+    const card = new Card(item, '#place-card-template', placeImagePopup.open.bind(placeImagePopup));
+    const cardNode = card.createDOMNode();
+
+    return cardNode;
+};
+
 // initialite places
 const placesSection = new Section({
     items: places,
     renderer: place => {
-        const card = new Card(place, '#place-card-template', placeImagePopup.open.bind(placeImagePopup));
-        const cardNode = card.createDOMNode();
+        const card = createCard(place);
 
-        placesSection.addItem(cardNode);
+        placesSection.addItem(card);
     },
 }, '#places-list');
 
@@ -31,6 +38,7 @@ const placeAddFormValidator = new FormValidator(
     'form[name="place-add-card__form"]',
     defaultFormValidatorSelectors
 );
+placeAddFormValidator.enableValidation();
 
 const placeAddPopup = new PopupWithForm(
     '.popup_type_card-add',
@@ -39,10 +47,9 @@ const placeAddPopup = new PopupWithForm(
 
         const formData = this._getInputValues(event);
 
-        const card = new Card(formData, '#place-card-template');
-        const cardNode = card.createDOMNode();
+        const card = createCard(formData);
 
-        placesSection.addItem(cardNode);
+        placesSection.addItem(card);
 
         this.close();
     }
@@ -52,7 +59,7 @@ placeAddPopup.setEventListeners();
 
 document.querySelector('.profile__add-button')
     .addEventListener('click', () => {
-        placeAddFormValidator.enableValidation();
+        placeAddFormValidator.checkIsPossibleSubmit();
         placeAddPopup.open();
     });
 
@@ -61,6 +68,7 @@ const profileSettingsFormValidator = new FormValidator(
     'form[name="profile-settings__form"]',
     defaultFormValidatorSelectors
 );
+profileSettingsFormValidator.enableValidation();
 
 const nameInput = profileSettingsFormValidator.form.querySelector('input[name="name"]');
 const aboutInput = profileSettingsFormValidator.form.querySelector('input[name="about"]');
@@ -87,6 +95,6 @@ document.querySelector('.profile__edit-button')
         nameInput.value = name;
         aboutInput.value = description;
 
-        profileSettingsFormValidator.enableValidation();
+        profileSettingsFormValidator.checkIsPossibleSubmit();
         profileSettingsPopup.open();
     });

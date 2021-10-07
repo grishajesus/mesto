@@ -1,15 +1,9 @@
-const defaultFormValidatorSelectors = {
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_error',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_visible'
-};
-
 class FormValidator {
     constructor(formSelector, selectors) {
         this.form = document.querySelector(formSelector);
         this.selectors = selectors;
+
+        this._buttonSubmit = this.form.querySelector(this.selectors.submitButtonSelector);
     }
 
     _setEventListeners() {
@@ -18,7 +12,7 @@ class FormValidator {
         inputs.forEach(input => {
             input.addEventListener('input', () => {
                 this._setInputListener(input);
-                this._checkIsPossibleSubmit();
+                this.checkIsPossibleSubmit();
             });
         });
     }
@@ -52,23 +46,22 @@ class FormValidator {
         errorContainer.textContent = error;
     };
 
-    _checkIsPossibleSubmit() {
-        const button = this.form.querySelector(this.selectors.submitButtonSelector)
+    checkIsPossibleSubmit() {
         const isValid = this.form.checkValidity();
 
         if (isValid) {
-            button.classList.remove(this.selectors.inactiveButtonClass);
-            button.removeAttribute('disabled');
+            this._buttonSubmit.classList.remove(this.selectors.inactiveButtonClass);
+            this._buttonSubmit.removeAttribute('disabled');
         } else {
-            button.classList.add(this.selectors.inactiveButtonClass);
-            button.setAttribute('disabled', 'disabled');
+            this._buttonSubmit.classList.add(this.selectors.inactiveButtonClass);
+            this._buttonSubmit.setAttribute('disabled', 'disabled');
         }
     }
 
     enableValidation() {
-        this._checkIsPossibleSubmit();
+        this.checkIsPossibleSubmit();
         this._setEventListeners();
     }
 }
 
-export { FormValidator, defaultFormValidatorSelectors };
+export { FormValidator };

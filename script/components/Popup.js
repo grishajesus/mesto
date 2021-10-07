@@ -1,6 +1,4 @@
-const keyCodes = {
-    ESCAPE: "Escape",
-}
+import { keyCodes } from "../constants/common.js"
 
 class Popup {
     constructor(selector) {
@@ -15,8 +13,8 @@ class Popup {
         this.popup.style.display = 'flex';
         this.popup.classList.add('popup_opened');
 
-        this.popup.addEventListener('click', this._handleClickOverlayClose.bind(this));
-        document.body.addEventListener('keydown', this._handleEscClose.bind(this));
+        this.popup.addEventListener('click', this._handleClickOverlayClose);
+        document.body.addEventListener('keydown', this._handleEscClose);
     }
 
     close() {
@@ -26,8 +24,8 @@ class Popup {
 
         this.popup.classList.remove('popup_opened');
 
-        this.popup.removeEventListener('click', this._handleClickOverlayClose.bind(this));
-        document.body.removeEventListener('keydown', this._handleEscClose.bind(this));
+        this.popup.removeEventListener('click', this._handleClickOverlayClose);
+        document.body.removeEventListener('keydown', this._handleEscClose);
     }
 
     setEventListeners() {
@@ -36,13 +34,13 @@ class Popup {
             .addEventListener('click', () => this.close());
     }
 
-    _handleClickOverlayClose(event) {
+    _handleClickOverlayClose = event => {
         if (event.target.classList.contains('popup')) {
             this.close(this.popup);
         }
     }
 
-    _handleEscClose(event) {
+    _handleEscClose = event => {
         if (event.code === keyCodes.ESCAPE && this.popup !== null) {
             this.close();
         }
