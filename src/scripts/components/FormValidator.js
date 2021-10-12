@@ -1,15 +1,18 @@
 class FormValidator {
     constructor(formSelector, selectors) {
-        this.form = document.querySelector(formSelector);
-        this.selectors = selectors;
+        this._form = document.querySelector(formSelector);
+        this._selectors = selectors;
 
-        this._buttonSubmit = this.form.querySelector(this.selectors.submitButtonSelector);
+        this._inputs = this._form.querySelectorAll(this._selectors.inputSelector);
+        this._buttonSubmit = this._form.querySelector(this._selectors.submitButtonSelector);
+    }
+
+    get form() {
+        return this._form;
     }
 
     _setEventListeners() {
-        const inputs = this.form.querySelectorAll(this.selectors.inputSelector);
-
-        inputs.forEach(input => {
+        this._inputs.forEach(input => {
             input.addEventListener('input', () => {
                 this._setInputListener(input);
                 this.checkIsPossibleSubmit();
@@ -18,7 +21,7 @@ class FormValidator {
     }
 
     _setInputListener(inputElement) {
-        const errorContainer = this.form.querySelector(`#${inputElement.name}-error`);
+        const errorContainer = this._form.querySelector(`#${inputElement.name}-error`);
         const validity = inputElement.validity;
 
         let error = '';
@@ -36,24 +39,24 @@ class FormValidator {
         }
 
         if (error) {
-            inputElement.classList.add(this.selectors.inputErrorClass);
-            errorContainer.classList.add(this.selectors.errorClass);
+            inputElement.classList.add(this._selectors.inputErrorClass);
+            errorContainer.classList.add(this._selectors.errorClass);
         } else {
-            inputElement.classList.remove(this.selectors.inputErrorClass);
-            errorContainer.classList.remove(this.selectors.errorClass);
+            inputElement.classList.remove(this._selectors.inputErrorClass);
+            errorContainer.classList.remove(this._selectors.errorClass);
         }
 
         errorContainer.textContent = error;
     };
 
     checkIsPossibleSubmit() {
-        const isValid = this.form.checkValidity();
+        const isValid = this._form.checkValidity();
 
         if (isValid) {
-            this._buttonSubmit.classList.remove(this.selectors.inactiveButtonClass);
+            this._buttonSubmit.classList.remove(this._selectors.inactiveButtonClass);
             this._buttonSubmit.removeAttribute('disabled');
         } else {
-            this._buttonSubmit.classList.add(this.selectors.inactiveButtonClass);
+            this._buttonSubmit.classList.add(this._selectors.inactiveButtonClass);
             this._buttonSubmit.setAttribute('disabled', 'disabled');
         }
     }

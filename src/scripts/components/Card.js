@@ -1,52 +1,48 @@
 class Card {
     constructor(place, templateSelector, handleCardClick) {
-        this.place = place;
-        this.templateSelector = document.querySelector(templateSelector);
-        this.handleCardClick = handleCardClick;
+        this._place = place;
+        this._template = document.querySelector(templateSelector);
+        this._handleCardClick = handleCardClick;
     }
 
     _shapeElementFromTemplate() {
-        const template = this.templateSelector.content;
-        const element = template.querySelector('.place-card').cloneNode(true);
+        this._element = this._template.content.querySelector('.place-card').cloneNode(true);
 
-        const name = element.querySelector('.place-card__name');
-        const image = element.querySelector('.place-card__image');
+        const name = this._element.querySelector('.place-card__name');
+        const image = this._element.querySelector('.place-card__image');
 
-        name.textContent = this.place.title;
-        image.src = this.place.link;
-        image.alt = this.place.title || this.place.name;
-
-        return element;
+        name.textContent = this._place.title;
+        image.src = this._place.link;
+        image.alt = this._place.title || this._place.name;
     }
 
-    _handleDelete(element) {
-	    element.remove();
+    _handleDelete() {
+	    this._element.remove();
     }
 
     _handleToggleLike(event) {
         event.target.classList.toggle("place-card__like-icon_active");
     }
 
-    _setListeners(element) {
-        element
+    _setListeners() {
+        this._element
             .querySelector('.place-card__delete')
-            .addEventListener('click', () => this._handleDelete(element));
+            .addEventListener('click', () => this._handleDelete());
 
-        element
+        this._element
             .querySelector('.place-card__like-icon')
-            .addEventListener('click', event => this._handleToggleLike(event));
+            .addEventListener('click', () => this._handleToggleLike());
 
-        element
+        this._element
             .querySelector('.place-card__image')
-            .addEventListener('click', () => this.handleCardClick(this.place.link, this.place.title));
+            .addEventListener('click', () => this._handleCardClick(this._place.link, this._place.title));
     }
 
     createDOMNode() {
-        const element = this._shapeElementFromTemplate();
+        this._shapeElementFromTemplate();
+        this._setListeners();
 
-        this._setListeners(element);
-
-        return element;
+        return this._element;
     }
 }
 

@@ -1,11 +1,8 @@
 # misc
 .DS_Store
 
-<<<<<<< HEAD
-=======
 # build
 dist
 
 # vendor
->>>>>>> webpack
 node_modules
