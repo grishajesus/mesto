@@ -20,8 +20,10 @@ class Card {
 	    this._element.remove();
     }
 
-    _handleToggleLike(event) {
-        event.target.classList.toggle("place-card__like-icon_active");
+    _handleToggleLike() {
+        this._element
+          .querySelector('.place-card__like-icon')
+          .classList.toggle("place-card__like-icon_active");
     }
 
     _setListeners() {
