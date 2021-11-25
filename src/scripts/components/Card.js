@@ -6,10 +6,12 @@ class Card {
     }
 
     _shapeElementFromTemplate() {
-        this._element = this._template.content.querySelector('.place-card').cloneNode(true);
+        this._element = this._template.content
+            .querySelector(".place-card")
+            .cloneNode(true);
 
-        const name = this._element.querySelector('.place-card__name');
-        const image = this._element.querySelector('.place-card__image');
+        const name = this._element.querySelector(".place-card__name");
+        const image = this._element.querySelector(".place-card__image");
 
         name.textContent = this._place.title;
         image.src = this._place.link;
@@ -17,27 +19,29 @@ class Card {
     }
 
     _handleDelete() {
-	    this._element.remove();
+        this._element.remove();
     }
 
     _handleToggleLike() {
         this._element
-          .querySelector('.place-card__like-icon')
-          .classList.toggle("place-card__like-icon_active");
+            .querySelector(".place-card__like-icon")
+            .classList.toggle("place-card__like-icon_active");
     }
 
     _setListeners() {
         this._element
-            .querySelector('.place-card__delete')
-            .addEventListener('click', () => this._handleDelete());
+            .querySelector(".place-card__delete")
+            .addEventListener("click", () => this._handleDelete());
 
         this._element
-            .querySelector('.place-card__like-icon')
-            .addEventListener('click', () => this._handleToggleLike());
+            .querySelector(".place-card__like-icon")
+            .addEventListener("click", () => this._handleToggleLike());
 
         this._element
-            .querySelector('.place-card__image')
-            .addEventListener('click', () => this._handleCardClick(this._place.link, this._place.title));
+            .querySelector(".place-card__image")
+            .addEventListener("click", () =>
+                this._handleCardClick(this._place.link, this._place.title)
+            );
     }
 
     createDOMNode() {
