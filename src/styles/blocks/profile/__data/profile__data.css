@@ -1,3 +1,5 @@
 .profile__data {
-  display: flex;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
 }

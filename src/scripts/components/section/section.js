@@ -5,6 +5,10 @@ class Section {
         this.container = document.querySelector(containerSelector);
     }
 
+    setItems(items) {
+        this.items = items;
+    }
+
     addItem(node) {
         this.container.prepend(node);
     }
@@ -14,7 +18,7 @@ class Section {
             return null;
         }
 
-        this.items.forEach(item => this.renderer(item));
+        this.items.forEach((item) => this.renderer(item));
     }
 }
 
