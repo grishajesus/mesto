@@ -7,31 +7,23 @@ class Api {
     }
 
     getCurrentUser() {
-        const url = this.baseUrl + "/users/me";
+        const url = `${this.baseUrl}/users/me`;
 
-        return fetch(url, { headers: this.headers }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        return fetch(url, { method: "GET", headers: this.headers }).then(
+            this._handleResponse
+        );
     }
 
     getPlaces() {
-        const url = this.baseUrl + "/cards";
+        const url = `${this.baseUrl}/cards`;
 
-        return fetch(url, { headers: this.headers }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        return fetch(url, { method: "GET", headers: this.headers }).then(
+            this._handleResponse
+        );
     }
 
     updateUser(data) {
-        const url = this.baseUrl + "/users/me";
+        const url = `${this.baseUrl}/users/me`;
 
         return fetch(url, {
             method: "PATCH",
@@ -40,17 +32,11 @@ class Api {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        }).then(this._handleResponse);
     }
 
     updateUserAvatar(avatar) {
-        const url = this.baseUrl + "/users/me/avatar";
+        const url = `${this.baseUrl}/users/me/avatar`;
         const body = { avatar };
 
         return fetch(url, {
@@ -60,17 +46,11 @@ class Api {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(body),
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        }).then(this._handleResponse);
     }
 
     createCard(data) {
-        const url = this.baseUrl + "/cards";
+        const url = `${this.baseUrl}/cards`;
 
         return fetch(url, {
             method: "POST",
@@ -79,58 +59,42 @@ class Api {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        }).then(this._handleResponse);
     }
 
     deleteCard(id) {
-        const url = this.baseUrl + "/cards/" + id;
+        const url = `${this.baseUrl}/cards/${id}`;
 
         return fetch(url, {
             method: "DELETE",
             headers: this.headers,
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        }).then(this._handleResponse);
     }
 
     createLike(cardId) {
-        const url = this.baseUrl + `/cards/${cardId}/likes`;
+        const url = `${this.baseUrl}/cards/${cardId}/likes`;
 
         return fetch(url, {
             method: "PUT",
             headers: this.headers,
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+        }).then(this._handleResponse);
     }
 
     deleteLike(cardId) {
-        const url = this.baseUrl + `/cards/${cardId}/likes`;
+        const url = `${this.baseUrl}/cards/${cardId}/likes`;
 
         return fetch(url, {
             method: "DELETE",
             headers: this.headers,
-        }).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
+        }).then(this._handleResponse);
+    }
 
-            return Promise.reject(`Ошибка: ${res.status}`);
-        });
+    _handleResponse(response) {
+        if (response.ok) {
+            return response.json();
+        }
+
+        return Promise.reject(`Ошибка: ${response.status}`);
     }
 }
 

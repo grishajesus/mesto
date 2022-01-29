@@ -16,12 +16,72 @@ const userInfo = new UserInfo(
     ".profile__job"
 );
 
-api.getCurrentUser()
-    .then((user) => {
+const handleCreateLike = (cardId, onSetLikes, onToggleLikeClass) => {
+    api.createLike(cardId)
+        .then((place) => {
+            onSetLikes(place);
+            onToggleLikeClass();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+
+const handleDeleteLike = (cardId, onSetLikes, onToggleLikeClass) => {
+    api.deleteLike(cardId)
+        .then((place) => {
+            onSetLikes(place);
+            onToggleLikeClass();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+
+function createCard(item) {
+    const currentUser = userInfo.getUserInfo();
+
+    const card = new Card(
+        item,
+        currentUser,
+        "#place-card-template",
+        placeImagePopup.open.bind(placeImagePopup),
+        placeDeleteSurePopup.open.bind(placeDeleteSurePopup),
+        handleCreateLike,
+        handleDeleteLike
+    );
+
+    const cardNode = card.createDOMNode();
+
+    return cardNode;
+}
+
+let placesSection;
+
+Promise.all([api.getCurrentUser(), api.getPlaces()])
+    .then((values) => {
+        const [user, places] = values;
+
         userInfo.setUserInfo(user);
+
+        const items = [...places].reverse();
+
+        placesSection = new Section(
+            {
+                items,
+                renderer: (place) => {
+                    const card = createCard(place);
+
+                    placesSection.addItem(card);
+                },
+            },
+            "#places-list"
+        );
+
+        placesSection.render();
     })
     .catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 
 // init settings popup
@@ -39,15 +99,11 @@ const aboutInput = profileSettingsFormValidator.form.querySelector(
 );
 
 const profileSettingsPopup = new PopupWithForm(".popup_type_profile", function (
-    event
+    data
 ) {
-    event.preventDefault();
-
-    const formData = profileSettingsPopup.getInputValues(event);
-
     profileSettingsPopup.enableLoading();
 
-    api.updateUser(formData)
+    api.updateUser(data)
         .then((user) => {
             userInfo.setUserInfo(user);
 
@@ -68,23 +124,22 @@ const profileEditAvatarFormValidator = new FormValidator(
     'form[name="profile-edit-avatar__form"]',
     defaultFormValidatorSelectors
 );
+profileEditAvatarFormValidator.enableValidation();
 
 const profileEditAvatarPopup = new PopupWithForm(
     ".popup_profile-avatar",
-    (event) => {
-        event.preventDefault();
-
-        const formData = profileEditAvatarPopup.getInputValues(event);
-
+    (data) => {
         profileEditAvatarPopup.enableLoading();
 
-        api.updateUserAvatar(formData.avatar)
+        api.updateUserAvatar(data.avatar)
             .then((user) => {
                 userInfo.setUserAvatar(user.avatar);
 
                 profileEditAvatarPopup.close();
             })
-            .catch()
+            .catch((error) => {
+                console.error(error);
+            })
             .finally(() => {
                 profileEditAvatarPopup.disableLoading();
             });
@@ -93,7 +148,6 @@ const profileEditAvatarPopup = new PopupWithForm(
 profileEditAvatarPopup.setEventListeners();
 
 document.querySelector(".profile__pic-edit").addEventListener("click", () => {
-    profileEditAvatarFormValidator.enableValidation();
     profileEditAvatarPopup.open();
 });
 
@@ -119,55 +173,6 @@ const placeDeleteSurePopup = new PopupSure(".popup_sure", (card, cardId) => {
 });
 placeDeleteSurePopup.setEventListeners();
 
-function createCard(item) {
-    const currentUser = userInfo.getUserInfo();
-
-    const canDelete = item.owner ? currentUser.id === item.owner._id : true;
-
-    const isSettedLike = !!item.likes.find(
-        (like) => like._id === currentUser.id
-    );
-
-    const card = new Card(
-        item,
-        "#place-card-template",
-        canDelete,
-        isSettedLike,
-        placeImagePopup.open.bind(placeImagePopup),
-        placeDeleteSurePopup.open.bind(placeDeleteSurePopup),
-        api.createLike.bind(api),
-        api.deleteLike.bind(api)
-    );
-    const cardNode = card.createDOMNode();
-
-    return cardNode;
-}
-
-let placesSection;
-
-// initialite places
-api.getPlaces()
-    .then((data) => {
-        const places = [...data].reverse();
-
-        placesSection = new Section(
-            {
-                items: places,
-                renderer: (place) => {
-                    const card = createCard(place);
-
-                    placesSection.addItem(card);
-                },
-            },
-            "#places-list"
-        );
-
-        placesSection.render();
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-
 // init place add popup
 const placeAddFormValidator = new FormValidator(
     'form[name="place-add-card__form"]',
@@ -176,14 +181,10 @@ const placeAddFormValidator = new FormValidator(
 placeAddFormValidator.enableValidation();
 
 const placeAddPopup = new PopupWithForm(".popup_type_card-add", function (
-    event
+    data
 ) {
-    event.preventDefault();
-
-    const formData = placeAddPopup.getInputValues(event);
-
     const payload = {
-        ...formData,
+        ...data,
         name: formData.title,
     };
 
