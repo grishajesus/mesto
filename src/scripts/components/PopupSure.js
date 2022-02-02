@@ -1,20 +1,13 @@
 import { Popup } from "./Popup";
 
 class PopupSure extends Popup {
-    constructor(selector, onSubmitForm) {
+    constructor(selector) {
         super(selector);
 
         this._form = this._popup.querySelector("form");
         this._submitButton = this._form.querySelector("button[type=submit]");
 
-        this._onSubmitForm = onSubmitForm;
-    }
-
-    open(card, cardId) {
-        super.open();
-
-        this._card = card;
-        this._cardId = cardId;
+        this._onSubmitForm = null;
     }
 
     enableLoading() {
@@ -34,7 +27,11 @@ class PopupSure extends Popup {
     handleSubmit(event) {
         event.preventDefault();
 
-        this._onSubmitForm(this._card, this._cardId);
+        this._onSubmitForm();
+    }
+
+    setSubmitFunction(callback) {
+        this._onSubmitForm = callback;
     }
 
     setEventListeners() {

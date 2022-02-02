@@ -16,6 +16,14 @@ const userInfo = new UserInfo(
     ".profile__job"
 );
 
+// init place image popup
+const placeImagePopup = new PopupWithImage(".popup_type_image");
+placeImagePopup.setEventListeners();
+
+// init place delete sure popup
+const placeDeleteSurePopup = new PopupSure(".popup_sure");
+placeDeleteSurePopup.setEventListeners();
+
 const handleCreateLike = (cardId, onSetLikes, onToggleLikeClass) => {
     api.createLike(cardId)
         .then((place) => {
@@ -46,7 +54,25 @@ function createCard(item) {
         currentUser,
         "#place-card-template",
         placeImagePopup.open.bind(placeImagePopup),
-        placeDeleteSurePopup.open.bind(placeDeleteSurePopup),
+        () => {
+            placeDeleteSurePopup.setSubmitFunction(() => {
+                placeDeleteSurePopup.enableLoading();
+
+                api.deleteCard(card._place._id)
+                    .then(() => {
+                        card.remove();
+                        placeDeleteSurePopup.close();
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    })
+                    .finally(() => {
+                        placeDeleteSurePopup.disableLoading();
+                    });
+            });
+
+            placeDeleteSurePopup.open();
+        },
         handleCreateLike,
         handleDeleteLike
     );
@@ -151,28 +177,6 @@ document.querySelector(".profile__pic-edit").addEventListener("click", () => {
     profileEditAvatarPopup.open();
 });
 
-// init place image popup
-const placeImagePopup = new PopupWithImage(".popup_type_image");
-placeImagePopup.setEventListeners();
-
-// init place delete sure popup
-const placeDeleteSurePopup = new PopupSure(".popup_sure", (card, cardId) => {
-    placeDeleteSurePopup.enableLoading();
-
-    api.deleteCard(cardId)
-        .then(() => {
-            card.remove();
-            placeDeleteSurePopup.close();
-        })
-        .catch((error) => {
-            console.error(error);
-        })
-        .finally(() => {
-            placeDeleteSurePopup.disableLoading();
-        });
-});
-placeDeleteSurePopup.setEventListeners();
-
 // init place add popup
 const placeAddFormValidator = new FormValidator(
     'form[name="place-add-card__form"]',
@@ -185,7 +189,7 @@ const placeAddPopup = new PopupWithForm(".popup_type_card-add", function (
 ) {
     const payload = {
         ...data,
-        name: formData.title,
+        name: data.title,
     };
 
     placeAddPopup.enableLoading();

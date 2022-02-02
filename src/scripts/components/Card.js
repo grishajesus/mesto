@@ -92,19 +92,17 @@ class Card {
         );
     }
 
-    _handleDeleteCard() {
-        this._handleOpenSureDeleteCard.call(
-            this,
-            this._element,
-            this._place._id
-        );
+    remove() {
+        this._element.remove();
     }
 
     _setListeners() {
         if (this._canDelete) {
             this._element
                 .querySelector(".place-card__delete")
-                .addEventListener("click", () => this._handleDeleteCard());
+                .addEventListener("click", () =>
+                    this._handleOpenSureDeleteCard()
+                );
         }
 
         this._element

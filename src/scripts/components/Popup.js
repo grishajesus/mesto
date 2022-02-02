@@ -13,6 +13,8 @@ class Popup {
             return;
         }
 
+        document.body.addEventListener("keydown", this.handleEscClose);
+
         this._popup.classList.add("popup_opened");
         this._popup.focus();
     }
@@ -22,12 +24,13 @@ class Popup {
             return;
         }
 
+        document.body.removeEventListener("keydown", this.handleEscClose);
+
         this._popup.classList.remove("popup_opened");
     }
 
     setEventListeners() {
         this._popup.addEventListener("click", this.handleClickOverlayClose);
-        document.body.addEventListener("keydown", this.handleEscClose);
 
         this._popup
             .querySelector(".popup__close-button")
